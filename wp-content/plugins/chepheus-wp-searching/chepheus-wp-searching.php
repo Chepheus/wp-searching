@@ -9,5 +9,6 @@ Version: 0.0.1
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$app = new \App\App(__FILE__);
+$logger = new \Katzgrau\KLogger\Logger(__DIR__ . '/logs');
+$app = new \App\App(__FILE__, $logger);
 $app->install();

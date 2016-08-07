@@ -1,4 +1,7 @@
 {
+  "require": {
+    "katzgrau/klogger": "dev-master"
+  },
   "autoload": {
     "psr-4": {
       "App\\": "src/"
