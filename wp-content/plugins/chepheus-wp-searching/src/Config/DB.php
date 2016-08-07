@@ -2,7 +2,7 @@
 
 namespace App\Config;
 
-class DBConfig {
+class DB {
     protected $wpdb;
     protected $tableName;
 

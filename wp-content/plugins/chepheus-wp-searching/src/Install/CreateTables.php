@@ -2,7 +2,7 @@
 
 namespace App\Install;
 
-use App\Config\DBConfig;
+use App\Config\DB;
 
 class CreateTables implements CreateTablesInterface {
     protected $wpdb;
@@ -11,7 +11,7 @@ class CreateTables implements CreateTablesInterface {
     {
         global $wpdb;
         $this->wpdb = $wpdb;
-        $this->config = new DBConfig();
+        $this->config = new DB();
     }
 
     /**
