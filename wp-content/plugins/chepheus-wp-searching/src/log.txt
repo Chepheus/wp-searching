@@ -1,0 +1,4 @@
+Array
+(
+    [wp_chepheus_searching] => Created table wp_chepheus_searching
+)
