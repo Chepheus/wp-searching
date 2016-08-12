@@ -46,4 +46,34 @@ class MenuView {
     {
         return $this->position;
     }
+
+    public function setPageTitle($value)
+    {
+        $this->pageTitle = $value;
+    }
+
+    public function setMenuTitle($value)
+    {
+        $this->menuTitle = $value;
+    }
+
+    public function setCapability($value)
+    {
+        $this->capability = $value;
+    }
+
+    public function setMenuSlug($value)
+    {
+        $this->menuSlug = $value;
+    }
+
+    public function setIconUrl($value)
+    {
+        $this->iconUrl = $value;
+    }
+
+    public function setPosition($value)
+    {
+        $this->position = $value;
+    }
 }

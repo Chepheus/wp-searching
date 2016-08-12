@@ -9,7 +9,11 @@ Version: 0.0.1
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+$mainConfig = \App\Config\MainConfig::getInstance();
+$mainConfig->setAttribute('pluginPath', __DIR__);
+$mainConfig->setAttribute('pluginEntryFile', __FILE__);
+
 $logger = new \Katzgrau\KLogger\Logger(__DIR__ . '/logs');
-$app = new \App\App(__FILE__, $logger);
+$app = new \App\App($logger);
 $app->install();
 $app->menuView();

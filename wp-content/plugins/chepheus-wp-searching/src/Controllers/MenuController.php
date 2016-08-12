@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View;
+namespace App\Controllers;
 
 use App\Config\MenuView;
 
-class Menu {
+class MenuController extends Controller {
     /**
      * @var MenuView
      */
@@ -12,13 +12,14 @@ class Menu {
 
     public function __construct()
     {
+        parent::__construct();
         $this->config = new MenuView();
     }
 
     public function initMenu()
     {
         $callable = function () {
-            echo 'Hello my menu!';
+            $this->getMenuPage();
         };
         add_action('admin_menu', function() use ($callable) {
             add_menu_page(
@@ -31,5 +32,10 @@ class Menu {
                 $this->config->getPosition()
             );
         });
+    }
+
+    protected function getMenuPage()
+    {
+        $this->render('/src/view/plugin-menu.phtml', ['title' => 'Hello!']);
     }
 }

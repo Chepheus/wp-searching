@@ -2,40 +2,34 @@
 
 namespace App;
 
-
-use App\Config\MenuView;
+use App\Config\MainConfig;
 use App\Install\CreateTables;
-use App\View\Menu;
+use App\Controllers\MenuController;
 use Katzgrau\KLogger\Logger;
 
 class App {
-    /**
-     * @var string
-     */
-    protected $file;
-
     /**
      * @var Logger
      */
     protected $logger;
 
-    public function __construct($file, Logger $logger)
+    public function __construct(Logger $logger)
     {
-        $this->file = $file;
         $this->logger = $logger;
     }
 
     public function install()
     {
         $createTables = new CreateTables();
-        register_activation_hook($this->file, function() use ($createTables) {
+        $file = MainConfig::getInstance()->getAttribute('pluginEntryFile');
+        register_activation_hook($file, function() use ($createTables) {
             $this->_install($createTables);
         });
     }
 
     public function menuView()
     {
-        (new Menu())->initMenu();
+        (new MenuController($_POST))->initMenu();
     }
 
     private function _install(CreateTables $createTables)
