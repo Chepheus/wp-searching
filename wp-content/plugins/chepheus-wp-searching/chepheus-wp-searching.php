@@ -13,7 +13,13 @@ $mainConfig = \App\Config\MainConfig::getInstance();
 $mainConfig->setAttribute('pluginPath', __DIR__);
 $mainConfig->setAttribute('pluginEntryFile', __FILE__);
 
+$controllerContainer = new \App\Container\ControllerContainer();
+$controllerContainer->addController(new \App\Controllers\MenuController());
+$controllerContainer->addController(new \App\Controllers\IndexingController());
+
 $logger = new \Katzgrau\KLogger\Logger(__DIR__ . '/logs');
-$app = new \App\App($logger);
+$app = new \App\App($logger, $controllerContainer);
 $app->install();
-$app->menuView();
+
+$router = new App\Routing\Router($app);
+$router->routing();

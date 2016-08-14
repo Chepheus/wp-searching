@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Config\MainConfig;
+use App\Container\ControllerContainer;
 use App\Install\CreateTables;
 use App\Controllers\MenuController;
 use Katzgrau\KLogger\Logger;
@@ -13,9 +14,15 @@ class App {
      */
     protected $logger;
 
-    public function __construct(Logger $logger)
+    /**
+     * @var ControllerContainer
+     */
+    protected $controllerContainer;
+
+    public function __construct(Logger $logger, ControllerContainer $controllerContainer)
     {
         $this->logger = $logger;
+        $this->controllerContainer = $controllerContainer;
     }
 
     public function install()
@@ -29,7 +36,11 @@ class App {
 
     public function menuView()
     {
-        (new MenuController($_POST))->initMenu();
+        /** @var MenuController $menuController */
+        $menuController = $this->controllerContainer->getController('menu');
+        if ($menuController) {
+            $menuController->initMenu();
+        }
     }
 
     private function _install(CreateTables $createTables)
@@ -40,5 +51,10 @@ class App {
         } else {
             $this->logger->notice('Creating table response: ' . (int) $result);
         }
+    }
+
+    public function getControllerContainer()
+    {
+        return $this->controllerContainer;
     }
 }

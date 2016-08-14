@@ -1,10 +1,19 @@
+<?php
+/**
+ * @var $routHelper App\Routing\RoutHelper
+ */
+?>
+
 <h1><?= $title; ?></h1>
 
-<form action="" method="post">
+<form action="<?= $routHelper->createRoute('settings/save'); ?>" method="post">
     <input type="hidden" name="test" value="off">
     <input type="checkbox" name="test" id="test">
     <label for="test">Test</label>
     <div>
-        <button type="submit">Save</button>
+        <button type="submit" name="save-settings" class="button button-primary">Save</button>
     </div>
+</form>
+<form action="<?= $routHelper->createRoute('indexing/indexing'); ?>" method="post">
+    <button type="submit" name="parse" class="button">Parse</button>
 </form>
